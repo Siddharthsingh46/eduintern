@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduIntern Clone</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* LOGIN PAGE */
+#loginPage {
+  display: flex;
+  height: 100vh;
+}
+
+/* LEFT SIDE */
+.left {
+  flex: 1;
+  position: relative;
+  background: linear-gradient(135deg, #0f2027, #2c5364);
+  color: white;
+  padding: 60px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 500px;
+}
+
+.content h1 {
+  font-size: 42px;
+}
+
+.content span {
+  color: #00c6ff;
+}
+
+.features div {
+  margin: 10px 0;
+}
+
+/* floating circles */
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+}
+
+.circle.one {
+  width: 200px;
+  height: 200px;
+  top: -50px;
+  right: -50px;
+}
+
+.circle.two {
+  width: 150px;
+  height: 150px;
+  bottom: -40px;
+  left: -40px;
+}
+
+/* RIGHT */
+.right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f7fa;
+}
+
+.login-box {
+  width: 320px;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+input, button {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+}
+
+button {
+  background: #0066ff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* DASHBOARD */
+#dashboard {
+  display: none;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+}
+
+.sidebar {
+  width: 230px;
+  background: #0d1117;
+  color: white;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  color: #00c6ff;
+}
+
+.sidebar p {
+  margin: 15px 0;
+  cursor: pointer;
+}
+
+.main {
+  flex: 1;
+  padding: 20px;
+  background: #f5f7fa;
+}
+
+/* STATS */
+.stats {
+  display: flex;
+  gap: 15px;
+}
+
+.stat-card {
+  flex: 1;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* PROGRESS */
+.progress-box {
+  margin-top: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.progress-bar {
+  height: 10px;
+  background: #ddd;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 40%;
+  background: #0066ff;
+}
+
+/* CARDS */
+.card {
+  background: white;
+  padding: 20px;
+  margin-top: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.card:hover {
+  background: #e6f0ff;
+}
+
+.announcement {
+  background: #fff3cd;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="loginPage">
+  <div class="left">
+    <div class="content">
+      <h1>Build Your <span>Future</span> 🚀</h1>
+      <p>Learn skills, complete internships, earn certificates.</p>
+
+      <div class="features">
+        <div>🎓 UGC Approved</div>
+        <div>💼 Real Projects</div>
+        <div>⚡ Instant Certificate</div>
+        <div>👨‍🏫 Mentor Support</div>
+      </div>
+    </div>
+
+    <div class="circle one"></div>
+    <div class="circle two"></div>
+  </div>
+
+  <div class="right">
+    <div class="login-box">
+      <h2>Login</h2>
+      <input id="email" placeholder="Email">
+      <input id="password" type="password" placeholder="Password">
+      <button onclick="login()">Login</button>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <div class="container">
+
+    <div class="sidebar">
+      <h2>EduIntern</h2>
+      <p onclick="showSection('home')">Dashboard</p>
+      <p onclick="showSection('courses')">My Internships</p>
+      <p onclick="showSection('certificate')">Certificates</p>
+      <p onclick="logout()">Logout</p>
+    </div>
+
+    <div class="main" id="content"></div>
+
+  </div>
+</div>
+
+<script>
+function login() {
+  if(email.value && password.value){
+    loginPage.style.display="none";
+    dashboard.style.display="block";
+    showSection('home');
+  } else {
+    alert("Enter details");
+  }
+}
+
+function logout(){
+  location.reload();
+}
+
+function showSection(section){
+  if(section==="home"){
+    content.innerHTML=`
+      <h1>Welcome 👋</h1>
+
+      <div class="stats">
+        <div class="stat-card"><h2>2</h2><p>Internships</p></div>
+        <div class="stat-card"><h2>1</h2><p>Certificates</p></div>
+        <div class="stat-card"><h2>40%</h2><p>Progress</p></div>
+      </div>
+
+      <div class="progress-box">
+        <h3>Progress</h3>
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="card">🌐 Active: Web Development</div>
+      <div class="announcement">📢 New AI Internship Available</div>
+    `;
+  }
+
+  if(section==="courses"){
+    content.innerHTML=`
+      <h1>My Internships</h1>
+
+      <div class="card" onclick="openInternship('web')">🌐 Web Development</div>
+      <div class="card" onclick="openInternship('ai')">🤖 AI Internship</div>
+    `;
+  }
+
+  if(section==="certificate"){
+    content.innerHTML=`<h1>Certificates</h1><div class="card">Download Certificate</div>`;
+  }
+}
+
+function openInternship(type){
+  if(type==="web"){
+    content.innerHTML=`
+      <h1>Web Development</h1>
+      <div class="card">HTML</div>
+      <div class="card">CSS</div>
+      <div class="card">JavaScript</div>
+      <button onclick="showSection('courses')">⬅ Back</button>
+    `;
+  }
+
+  if(type==="ai"){
+    content.innerHTML=`
+      <h1>AI Internship</h1>
+      <div class="card">Python</div>
+      <div class="card">Machine Learning</div>
+      <button onclick="showSection('courses')">⬅ Back</button>
+    `;
+  }
+}
+</script>
+
+</body>
+</html>
